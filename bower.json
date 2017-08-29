@@ -1,0 +1,24 @@
+{
+  "name": "angularjs-project",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Jerome Rosal <jerome.r@projectassistant.org>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "animate.css": "^3.5.2",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0",
+    "firebase": "^4.3.0"
+  }
+}
