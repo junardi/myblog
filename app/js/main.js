@@ -7,42 +7,49 @@ require('angularfire');
 var config = {};
 
 config = {
-     // apiKey: "AIzaSyDs4BkehVOwJg4vpvgnbh34oJUPVBKhA70 ",
-     // authDomain: "angular-js-training.firebaseapp.com",
-     // databaseURL: "https://angular-js-training.firebaseio.com",
-     // storageBucket: "angular-js-training.appspot.com",
-     // messagingSenderId: "359711215515"
+     apiKey: "AIzaSyD2GZ7I0ZaWK2Z16fm8CLqvqb3DiS3UIj8",
+     authDomain: "myblog-80f2e.firebaseapp.com",
+     databaseURL: "https://myblog-80f2e.firebaseio.com",
+     storageBucket: "",
+     messagingSenderId: "515114687685"
 };
 
 firebase.initializeApp(config);
 
 
-var mainCtrl = require('./controllers/mainctrl');
+var mainCtrl = require('./controllers/mainctrl');   
+var homeCtrl = require('./controllers/home');
 
 
-angular.module('app', ['ngRoute', 'ngAnimate', 'firebase'])
-     .constant('global_config', {
-          routes: {
-          // put global routes here
-          }
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'firebase']);  
+
+app.constant('global_config', {
+     routes: {
+     // put global routes here
+     }
+});
+
+app.config( function($locationProvider, $routeProvider, $firebaseRefProvider, global_config) {
+     $locationProvider.hashPrefix(''); 
+   
+     $firebaseRefProvider.registerUrl({
+          default: config.databaseURL,
+     });
+     // routes
+     $routeProvider
+     .when("/", {
+          templateUrl: "./views/view1.html",
+          controller: "MainController"
+     })   
+     .when("/home", { 
+          templateUrl: "./views/home.html",   
+          controller: "HomeController" 
      })
-
-     .config( function($locationProvider, $routeProvider, $firebaseRefProvider) {
-          $locationProvider.hashPrefix('');
-
-          $firebaseRefProvider.registerUrl({
-               default: config.databaseURL,
-          });
-          // routes
-          $routeProvider
-          .when("/", {
-               templateUrl: "./views/view1.html",
-               controller: "MainController"
-          })
-          .otherwise({
-               redirectTo: '/'
-          });
-     })
+     .otherwise({
+          redirectTo: '/'
+     });
+});
 
 //Load controller
-     .controller('MainController', ['$scope', '$firebaseRef', '$firebaseArray', '$location', mainCtrl]);
+app.controller('MainController', ['$scope', '$firebaseRef', '$firebaseArray', '$location', mainCtrl]);   
+app.controller('HomeController', ['$scope', '$firebaseRef', '$firebaseArray', '$location', homeCtrl]);
