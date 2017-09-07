@@ -1,2 +1,8 @@
-<p>{{ test }}</p>
-{{hello}}
+<ul ng-repeat="item in items">
+	<li>{{item.name}}</li>   
+	<li ng-if="item.subItem != undefined">  
+		<ul ng-repeat="subitem in item.subItem"> 
+			<li>{{subitem.subName}}</li>
+		</ul>
+	</li>
+</ul>

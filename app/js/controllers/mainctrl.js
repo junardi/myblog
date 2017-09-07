@@ -1,8 +1,12 @@
 module.exports = function($scope, $firebaseRef, $firebaseArray) {
-  $scope.test = "Testing...";
+	$scope.test = "Testing...";
 
-  $scope.hello = "Hello World!";
+	$scope.hello = "Hello World!";
 
-  var usersRef = $firebaseRef.users;
-  console.log("required!");
+	var itemsRef = $firebaseRef.items;    
+
+	$scope.items = $firebaseArray(itemsRef);            
+
+	console.log($scope.items);
+
 };
